@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}Terminal-Colorify - Tutorial{% endblock %}
+{% block content %}
+
+<nav class="top-nav">
+  <a href="index.html">Home</a>
+  <a href="#tutorial">Tutorial</a>
+</nav>
+
+<section id="tutorial" class="scroll-section">
+  <h2>Tutorial</h2>
+  <p class="desc">This tutorial will guide you through the basic usage of Terminal-Colorify. Follow the steps below to get started quickly!</p>
+
+  <ol class="desc">
+    <li><strong>Install Terminal-Colorify</strong> with pip:
+      <div class="code-block"><pre><code>pip install terminal-colorify</code></pre></div>
+    </li>
+
+    <li><strong>Import the library</strong> into your Python project:
+      <div class="code-block"><pre><code>from colors import Colors</code></pre></div>
+    </li>
+
+    <li><strong>Print colored text</strong> with simple functions:
+      <div class="code-block"><pre><code>print(Colors.set_color(color="green", text="Operation Successful"))</code></pre></div>
+    </li>
+
+    <li><strong>Apply gradients or rainbow effects</strong>:
+      <div class="code-block"><pre><code>print(Colors.gradient_text("Gradient Example", (255,0,0), (0,0,255)))
+print(Colors.rainbow_text("Rainbow Example"))</code></pre></div>
+    </li>
+
+    <li><strong>Use built-in themes</strong> for quick styling:
+      <div class="code-block"><pre><code>print(Colors.theme_text("Warning message", theme="warning"))</code></pre></div>
+    </li>
+  </ol>
+
+  <p class="desc">That's it! Youre ready to make your terminal colorful and dynamic. More advanced features will be available in the full documentation soon.</p>
+
+</section>
+
+<style>
+body {
+  background-color: #000;
+  color: #eee;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to right, #ff416c, #ff4b2b, #1e90ff);
+  padding: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.top-nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.top-nav a.active, .top-nav a:hover {
+  background: rgba(255,255,255,0.9);
+  color: #000;
+}
+
+.scroll-section {
+  padding: 100px 20px;
+  min-height: 100vh;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.code-block {
+  background-color: #111;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+/* Scroll animations */
+.scroll-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+.scroll-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+// Intersection Observer for fade animation
+const sections = document.querySelectorAll('.scroll-section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(section => {
+  observer.observe(section);
+});
+</script>
